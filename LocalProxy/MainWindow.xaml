@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:LocalProxy"
         mc:Ignorable="d"
-        Title="MainWindow" Height="220" Width="324" 
+        Title="LocalProxyTool" Height="220" Width="324" 
         ResizeMode="NoResize" Closed="Window_Closed">
     
     <StackPanel>
@@ -14,13 +14,13 @@
             <TextBlock Margin="10" Text="Server" FontSize="16" FontWeight="Bold"
                        FontFamily="Consolas" VerticalAlignment="Center"/>
             <TextBox x:Name="ServerIP" Width="200" VerticalAlignment="Center"
-                     ToolTip="服务器IP地址"/>
+                     ToolTip="服务器IP地址" FontFamily="Consolas"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10">
             <TextBlock Margin="10" Text="Port  " FontSize="16" FontWeight="Bold"
                FontFamily="Consolas" VerticalAlignment="Center"/>
             <TextBox x:Name="ServerPort" Width="200" VerticalAlignment="Center"
-                     ToolTip="服务器端口"/>
+                     ToolTip="服务器端口" FontFamily="Consolas"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -36,7 +36,7 @@
                     Style="{StaticResource ButtonInfo}" Padding="0"
                     hc:IconElement.Geometry="{StaticResource RotateRightGeometry}"
                     hc:IconElement.Height="15" hc:IconElement.Width="15"
-                    hc:BorderElement.CornerRadius="5"
+                    Click="Button_Click" hc:BorderElement.CornerRadius="5"
                     FontSize="16" FontWeight="Bold" FontFamily="Consolas"
                     ToolTip="从服务器更新配置"/>
         </StackPanel>

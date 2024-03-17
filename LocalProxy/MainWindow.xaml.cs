@@ -17,6 +17,7 @@ using Microsoft.Win32;
 using System.Net.NetworkInformation;
 using HandyControl.Controls;
 using System.Configuration;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace LocalProxy
 {
@@ -41,6 +42,16 @@ namespace LocalProxy
 
             ServerIP.Text = ServerIP_Saved;
             ServerPort.Text = ServerPort_Saved;
+        }
+
+        private void SendMsg2Desktop(string MsgTitle, string MsgContent)
+        {
+            new ToastContentBuilder()
+                .AddArgument("action", "viewConversation")
+                .AddArgument("conversationId", 9813)
+                .AddText(MsgTitle)
+                .AddText(MsgContent)
+                .Show();
         }
 
         private void Set_Proxy_hdlr(object sender, RoutedEventArgs e)
@@ -73,11 +84,15 @@ namespace LocalProxy
                         InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
 
                         ProxyButton.Background = isConnected ? StartColor : TerminateColor;
-                        ProxyButton.ToolTip = isConnected ? "开启服务器代理" : "关闭服务器代理";
+                        ProxyButton.ToolTip = isConnected ? "关闭服务器代理" : "开启服务器代理";
+                        ProxyButton.Content = isConnected ? "Proxy" : "Terminate";
                         ProxyButton.SetCurrentValue(IconElement.GeometryProperty, isConnected ? StartGeometry : TeminateGeometry);
 
                         ServerIP.IsEnabled = isConnected ? true: false;
                         ServerPort.IsEnabled = isConnected ? true : false;
+
+                        SendMsg2Desktop((isConnected ? "关闭代理成功": "开启代理成功"), 
+                            isConnected ? $"已关闭指向{ServerIP.Text}服务器的代理服务" : $"代理服务器连接已建立：{proxyhost}");
 
                         //更新连接状态
                         isConnected = !isConnected;
@@ -101,17 +116,19 @@ namespace LocalProxy
 
                 if (reply.Status == IPStatus.Success)
                 {
-                    Console.WriteLine($"服务器连接成功! Roundtrip time: {reply.RoundtripTime} ms");
+                    Console.WriteLine($"检测到服务器! Roundtrip time: {reply.RoundtripTime} ms");
                     serverOn = true;
                 }
                 else
                 {
                     Console.WriteLine($"无法连接到服务器: {reply.Status}");
+                    SendMsg2Desktop("无法连接到服务器", $"服务器IP有误或服务器不在线，无法获取连接：{reply.Status}");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"连接服务器失败，Erroe: {ex.Message}");
+                SendMsg2Desktop("连接服务器失败", $"服务器IP有误或服务器不在线，无法获取连接：{ex.Message}");
             }
 
             return serverOn;
@@ -128,6 +145,11 @@ namespace LocalProxy
             cfa.AppSettings.Settings["ServerIP"].Value = ServerIP.Text;
             cfa.AppSettings.Settings["ServerPort"].Value = ServerPort.Text;
             cfa.Save();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SendMsg2Desktop("test", "hello");
         }
     }
 }
