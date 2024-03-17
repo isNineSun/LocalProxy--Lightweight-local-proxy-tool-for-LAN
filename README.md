@@ -1,1 +1,1 @@
-# LocalProxy_solution
+# LocalProxy--Lightweight local proxy tool for LAN
