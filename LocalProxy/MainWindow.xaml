@@ -1,0 +1,44 @@
+﻿<Window x:Class="LocalProxy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:LocalProxy"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="220" Width="324" 
+        ResizeMode="NoResize" Closed="Window_Closed">
+    
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Margin="10" Text="Server" FontSize="16" FontWeight="Bold"
+                       FontFamily="Consolas" VerticalAlignment="Center"/>
+            <TextBox x:Name="ServerIP" Width="200" VerticalAlignment="Center"
+                     ToolTip="服务器IP地址"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Margin="10" Text="Port  " FontSize="16" FontWeight="Bold"
+               FontFamily="Consolas" VerticalAlignment="Center"/>
+            <TextBox x:Name="ServerPort" Width="200" VerticalAlignment="Center"
+                     ToolTip="服务器端口"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="ProxyButton" Content="Proxy" Height="40" Width="90" Margin="30,0,50,10" 
+                    Style="{StaticResource ButtonPrimary}" Padding="0"
+                    hc:IconElement.Geometry="{StaticResource AudioGeometry}"
+                    hc:IconElement.Height="15" hc:IconElement.Width="15"
+                    Click="Set_Proxy_hdlr" hc:BorderElement.CornerRadius="5"
+                    FontSize="16" FontWeight="Bold" FontFamily="Consolas"
+                    ToolTip="开启服务器代理"/>
+
+            <Button Content="Update" Height="40" Width="90" Margin="30,0,10,10"
+                    Style="{StaticResource ButtonInfo}" Padding="0"
+                    hc:IconElement.Geometry="{StaticResource RotateRightGeometry}"
+                    hc:IconElement.Height="15" hc:IconElement.Width="15"
+                    hc:BorderElement.CornerRadius="5"
+                    FontSize="16" FontWeight="Bold" FontFamily="Consolas"
+                    ToolTip="从服务器更新配置"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
