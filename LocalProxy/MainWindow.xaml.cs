@@ -18,13 +18,14 @@ using System.Net.NetworkInformation;
 using HandyControl.Controls;
 using System.Configuration;
 using Microsoft.Toolkit.Uwp.Notifications;
+using System.Diagnostics;
 
 namespace LocalProxy
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : HandyControl.Controls.Window
     {
         [DllImport("wininet.dll")]
         private static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);
@@ -150,6 +151,12 @@ namespace LocalProxy
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SendMsg2Desktop("test", "hello");
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

@@ -114,5 +114,8 @@
       <Version>7.1.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\aako8-4otcw-001.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
