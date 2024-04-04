@@ -136,6 +136,11 @@
     <Resource Include="a2cii-vhfw0-001.ico" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Costura.Fody">
+      <Version>5.7.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="HandyControl">
       <Version>3.5.1</Version>
     </PackageReference>
