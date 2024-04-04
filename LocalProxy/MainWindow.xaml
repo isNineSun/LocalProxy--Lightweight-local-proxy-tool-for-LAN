@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         hc:Background="White" WindowStartupLocation="CenterScreen"
         Title="LocalProxyTool" Height="420" Width="324" FontFamily="Consolas"
-        ResizeMode="NoResize" Closed="Window_Closed">
+        ResizeMode="NoResize" Closing="Window_Closing">
     
     <StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,10,10,5">
@@ -106,6 +106,16 @@
                 </Grid>
             </Border>
         </hc:Drawer>
-        
+
+        <hc:NotifyIcon Text="LocalProxyTool" Visibility="Visible" Icon="\images\aako8-4otcw-001.png" MouseDoubleClick="OpenPanel_Click">
+            <hc:NotifyIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="打开面板" Click="OpenPanel_Click"/>
+                    <MenuItem Header="退出" Click="ExitAPP_Click"/>
+                </ContextMenu>
+            </hc:NotifyIcon.ContextMenu>
+        </hc:NotifyIcon>
+
+
     </StackPanel>
 </hc:Window>

@@ -19,6 +19,7 @@ using HandyControl.Controls;
 using System.Configuration;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace LocalProxy
 {
@@ -33,6 +34,7 @@ namespace LocalProxy
         private const int INTERNET_OPTION_REFRESH = 37;
 
         private bool isConnected = false;
+        private bool isHidden = false;
 
         public MainWindow()
         {
@@ -138,9 +140,16 @@ namespace LocalProxy
             return serverOn;
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Parameters_Saved();
+
+            e.Cancel = true;
+            Hide();
+            isHidden = true;
+
+            //ExitWindow exitWindow = new ExitWindow();
+            //exitWindow.Show();
         }
 
         private void Parameters_Saved()
@@ -161,6 +170,21 @@ namespace LocalProxy
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void OpenPanel_Click(object sender, RoutedEventArgs e)
+        {
+            if (isHidden == true)
+            {
+                Show();
+                Activate();
+                isHidden = false;
+            }
+        }
+
+        private void ExitAPP_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
