@@ -89,7 +89,7 @@
                                        FontFamily="Consolas" VerticalAlignment="Center" Foreground="#000033">
                             <Hyperlink NavigateUri="https://github.com/isNineSun/LocalProxy--Lightweight-local-proxy-tool-for-LAN/releases" 
                                        RequestNavigate="Hyperlink_RequestNavigate">
-                                V1.00
+                                V1.01
                             </Hyperlink>
                             </TextBlock>
                             <TextBlock Margin="0" Text="Github:" FontSize="16" FontWeight="Bold"
