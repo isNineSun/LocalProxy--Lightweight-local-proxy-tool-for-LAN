@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:LocalProxy"
         mc:Ignorable="d"
         hc:Background="White" WindowStartupLocation="CenterScreen"
-        Title="LocalProxyTool" Height="220" Width="324" FontFamily="Consolas"
+        Title="LocalProxyTool" Height="420" Width="324" FontFamily="Consolas"
         ResizeMode="NoResize" Closed="Window_Closed">
     
     <StackPanel>
@@ -22,6 +22,15 @@
                FontFamily="Consolas" VerticalAlignment="Center" Foreground="#000033"/>
             <TextBox x:Name="ServerPort" Width="200" VerticalAlignment="Center"
                      ToolTip="服务器端口" FontFamily="Consolas"/>
+        </StackPanel>
+
+        <StackPanel Margin="10,0,10,10">
+            <TextBlock Margin="10" Text="Exclude Domain Name" FontSize="16" FontWeight="Bold"
+                FontFamily="Consolas" VerticalAlignment="Center" Foreground="#000033"/>
+            <TextBox x:Name="Exclude" Margin="10,0,0,0" Width="264" Height="160" MaxWidth="264" TextWrapping="Wrap"
+                     VerticalAlignment="Top" HorizontalAlignment="Left" Padding="10"
+                     VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
+                ToolTip="不希望使用代理的域名" FontFamily="Consolas"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">

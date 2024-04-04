@@ -40,9 +40,11 @@ namespace LocalProxy
 
             string ServerIP_Saved = ConfigurationManager.AppSettings["ServerIP"];
             string ServerPort_Saved = ConfigurationManager.AppSettings["ServerPort"];
+            string Exclude_Saved = ConfigurationManager.AppSettings["Exclude"];
 
             ServerIP.Text = ServerIP_Saved;
             ServerPort.Text = ServerPort_Saved;
+            Exclude.Text = Exclude_Saved;
         }
 
         private void SendMsg2Desktop(string MsgTitle, string MsgContent)
@@ -70,6 +72,7 @@ namespace LocalProxy
                 if (TestConnectivity(ServerIP.Text))
                 {
                     string proxyhost = $"http://{ServerIP.Text}:{ServerPort.Text}";
+                    string excluderules = Exclude.Text;
 
                     Parameters_Saved();
 
@@ -79,7 +82,7 @@ namespace LocalProxy
                         const string subkey = @"Software\Microsoft\Windows\CurrentVersion\Internet Settings";
                         const string keyName = userRoot + @"\" + subkey;
                         Registry.SetValue(keyName, "ProxyServer", isConnected ? "":proxyhost);
-                        Registry.SetValue(keyName, "ProxyOverride", "<local>");
+                        Registry.SetValue(keyName, "ProxyOverride", "<local>" + excluderules);
                         Registry.SetValue(keyName, "ProxyEnable", isConnected ? "0":"1", RegistryValueKind.DWord);
                         InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
                         InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
@@ -145,6 +148,7 @@ namespace LocalProxy
             Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             cfa.AppSettings.Settings["ServerIP"].Value = ServerIP.Text;
             cfa.AppSettings.Settings["ServerPort"].Value = ServerPort.Text;
+            cfa.AppSettings.Settings["Exclude"].Value = Exclude.Text;
             cfa.Save();
         }
 
