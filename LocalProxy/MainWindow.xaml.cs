@@ -36,9 +36,25 @@ namespace LocalProxy
         private bool isConnected = false;
         private bool isHidden = false;
 
+        [DllImport("user32.dll")]
+        public static extern void SwitchToThisWindow(IntPtr hWnd, bool fAltTab);
+
         public MainWindow()
         {
             InitializeComponent();
+
+            string strProcessName = Process.GetCurrentProcess().ProcessName;
+            Process[] processes = Process.GetProcessesByName(strProcessName);
+
+            if (processes.Length > 1)
+            {
+                HandyControl.Controls.MessageBox.Show("应用程序运行中");
+                IntPtr mainWindowHandle = processes[0].MainWindowHandle;
+                SwitchToThisWindow(mainWindowHandle, true);
+                isHidden = false;
+                Environment.Exit(0); // 关闭当前进程
+                return;
+            }
 
             string ServerIP_Saved = ConfigurationManager.AppSettings["ServerIP"];
             string ServerPort_Saved = ConfigurationManager.AppSettings["ServerPort"];
